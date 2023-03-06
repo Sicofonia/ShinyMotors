@@ -12,27 +12,27 @@ classdef TicketRepositoryAdapterTests < matlab.unittest.TestCase
 
     methods (Test)
         % Test methods
-        function GetWashReturnsEmptyWhenCodeDoesNOTExistInDatabase(testCase)
+        function GetTicketReturnsEmptyWhenCodeDoesNOTExistInDatabase(testCase)
             testAdapter = TicketRepositoryAdapterFactory.create(testCase.config);
-            wash = testAdapter.getWash('000000');
-            testCase.verifyEmpty(wash);
+            ticket = testAdapter.getTicket('000000');
+            testCase.verifyEmpty(ticket);
         end
 
-        function GetWashReturnsWashWhenCodeExistsInDatabase(testCase)
+        function GetTicketReturnsValidQuickWashTicketWhenCodeExistsInDatabase(testCase)
             testAdapter = TicketRepositoryAdapterFactory.create(testCase.config);
-            wash = testAdapter.getWash('123456');
-            testCase.verifyNotEmpty(wash);
+            ticket = testAdapter.getTicket('123456');
+            testCase.verifyEqual(ticket.getWashType(), Wash_Types.Quick);
         end
 
         function GetWashThrowsErrorWhenCodeBiggerThan6Chars(testCase)
             testAdapter = TicketRepositoryAdapterFactory.create(testCase.config);
-            verifyError(testCase,@()testAdapter.getWash('123456789'),...
+            verifyError(testCase,@()testAdapter.getTicket('123456789'),...
                 "TicketRepositoryTestAdapter:wrongLength");
         end
 
         function GetWashThrowsErrorWhenCodeShorterThan6Chars(testCase)
             testAdapter = TicketRepositoryAdapterFactory.create(testCase.config);
-            verifyError(testCase,@()testAdapter.getWash('123'),...
+            verifyError(testCase,@()testAdapter.getTicket('123'),...
                 "TicketRepositoryTestAdapter:wrongLength");
         end
     end

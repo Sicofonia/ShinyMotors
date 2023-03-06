@@ -3,7 +3,7 @@ classdef PurchasedTicketRepositoryAdapter < ITicketRepositoryAdapter
     %   Detailed explanation goes here
 
     methods
-        function wash = getWash(obj, code)
+        function wash = getTicket(obj, code)
             %getWash Given a ticket code, return the associated wash type
         end
     end
