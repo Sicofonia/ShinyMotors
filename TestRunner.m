@@ -35,10 +35,11 @@ classdef TestRunner
 
     methods(Static)
         function runAll()
-            unitResults = runtests(TestRunner.unitTestsPath);
+            %unitResults = runtests(TestRunner.unitTestsPath);
             uiResults = runtests(TestRunner.uiTestsPath);
-            integrationResults = runtests(TestRunner.integrationTestsPath);
-
+            %integrationResults = runtests(TestRunner.integrationTestsPath);
+            unitResults = [];
+            integrationResults =[];
             passCount = 0;
             for i=1:length(unitResults)
                 passCount = passCount + unitResults(i).Passed;

@@ -7,7 +7,13 @@ classdef CarWashAppSimulatorIntegrationTests < matlab.uitest.TestCase
 
     methods(TestMethodSetup)
         function instantiateApp(testCase)
-            testCase.App = CarWashSimulatorApp(1,struct([]),struct([]));
+            config.isSimulation = 1;
+            config.screenTimeoutPeriodSecs = 120;
+            config.WaterPumpStatus = 1;
+            config.SoapLevel = 100;
+            config.WaxLevel = 15;
+            config.UltraShineLevel = 100;
+            testCase.App = CarWashSimulatorApp(config,struct([]),struct([]));
         end
     end
 
@@ -20,7 +26,7 @@ classdef CarWashAppSimulatorIntegrationTests < matlab.uitest.TestCase
 
     methods(Test)
         % Test methods
-        function enteringAValid6DigitsCodeTriggersWashSimulator(testCase)           
+        function enteringAValidQuickWashCodeTriggersWashSimulator(testCase)           
             testCase.press(testCase.App.EnterCodeButton);
 
             testCase.press(testCase.App.Button_1);
@@ -29,6 +35,39 @@ classdef CarWashAppSimulatorIntegrationTests < matlab.uitest.TestCase
             testCase.press(testCase.App.Button_4);
             testCase.press(testCase.App.Button_5);
             testCase.press(testCase.App.Button_6);
+        end
+
+        function enteringAValidStandardWashCodeTriggersWashSimulator(testCase)           
+            testCase.press(testCase.App.EnterCodeButton);
+
+            testCase.press(testCase.App.Button_1);
+            testCase.press(testCase.App.Button_2);
+            testCase.press(testCase.App.Button_3);
+            testCase.press(testCase.App.Button_4);
+            testCase.press(testCase.App.Button_5);
+            testCase.press(testCase.App.Button_7);
+        end
+
+        function enteringAValidPremiumWashCodeTriggersWashSimulator(testCase)           
+            testCase.press(testCase.App.EnterCodeButton);
+
+            testCase.press(testCase.App.Button_1);
+            testCase.press(testCase.App.Button_2);
+            testCase.press(testCase.App.Button_3);
+            testCase.press(testCase.App.Button_4);
+            testCase.press(testCase.App.Button_5);
+            testCase.press(testCase.App.Button_8);
+        end
+
+        function enteringAValidUltimateWashCodeTriggersWashSimulator(testCase)           
+            testCase.press(testCase.App.EnterCodeButton);
+
+            testCase.press(testCase.App.Button_1);
+            testCase.press(testCase.App.Button_2);
+            testCase.press(testCase.App.Button_3);
+            testCase.press(testCase.App.Button_4);
+            testCase.press(testCase.App.Button_5);
+            testCase.press(testCase.App.Button_9);
         end
     end 
 end

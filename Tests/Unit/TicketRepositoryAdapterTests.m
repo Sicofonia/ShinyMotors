@@ -21,7 +21,25 @@ classdef TicketRepositoryAdapterTests < matlab.unittest.TestCase
         function GetTicketReturnsValidQuickWashTicketWhenCodeExistsInDatabase(testCase)
             testAdapter = TicketRepositoryAdapterFactory.create(testCase.config);
             ticket = testAdapter.getTicket('123456');
-            testCase.verifyEqual(ticket.getWashType(), Wash_Types.Quick);
+            testCase.verifyEqual(ticket.getWashType(), WashTypes.Quick);
+        end
+
+        function GetTicketReturnsValidStandardWashTicketWhenCodeExistsInDatabase(testCase)
+            testAdapter = TicketRepositoryAdapterFactory.create(testCase.config);
+            ticket = testAdapter.getTicket('123457');
+            testCase.verifyEqual(ticket.getWashType(), WashTypes.Standard);
+        end
+
+        function GetTicketReturnsValidPremiumWashTicketWhenCodeExistsInDatabase(testCase)
+            testAdapter = TicketRepositoryAdapterFactory.create(testCase.config);
+            ticket = testAdapter.getTicket('123458');
+            testCase.verifyEqual(ticket.getWashType(), WashTypes.Premium);
+        end
+
+        function GetTicketReturnsValidUltimateWashTicketWhenCodeExistsInDatabase(testCase)
+            testAdapter = TicketRepositoryAdapterFactory.create(testCase.config);
+            ticket = testAdapter.getTicket('123459');
+            testCase.verifyEqual(ticket.getWashType(), WashTypes.Ultimate);
         end
 
         function GetWashThrowsErrorWhenCodeBiggerThan6Chars(testCase)
