@@ -15,6 +15,8 @@ App along with the simulator), UI (it only tests the UI of the app, using
 mocks as explained in [here](https://uk.mathworks.com/help/matlab/matlab_prog/write-tests-that-use-app-testing-and-mocking-frameworks.html)),
 and Unit tests (for testing individual classes).
 To run all tests execute the command `TestRunner.runAll()`.
+(Ensure you have the root, Model and Tests folders added to the MATLAB path
+variable for tests to run successfully).
 
 ## Execution
 Run the script `runApp` from the command window in MATLAB to run the simulation.
