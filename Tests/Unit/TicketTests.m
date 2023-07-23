@@ -6,7 +6,7 @@ classdef TicketTests < matlab.unittest.TestCase
 
     methods(TestClassSetup)        
         function instantiateTestTicket(testCase)
-            testCase.TestTicket = Ticket('123456', WashTypes.Quick, ...
+            testCase.TestTicket = Ticket('123456', WashType.Quick, ...
                 datetime(2023,1,1));
         end
     end
@@ -18,7 +18,7 @@ classdef TicketTests < matlab.unittest.TestCase
         end
 
         function getWashTypeReturnsWashType(testCase)
-            testCase.verifyEqual(testCase.TestTicket.getWashType(), WashTypes.Quick);
+            testCase.verifyEqual(testCase.TestTicket.getWashType(), WashType.Quick);
         end
 
         function getPurchasedDateReturnsPurchasedDate(testCase)

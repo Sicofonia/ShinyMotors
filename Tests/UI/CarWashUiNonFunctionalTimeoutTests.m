@@ -1,5 +1,5 @@
 classdef CarWashUiNonFunctionalTimeoutTests < matlab.uitest.TestCase & matlab.mock.TestCase
-    % UI Tests for the ShinyMotors app
+    % UI Tests for the time-out of operations in the ShinyMotors app
 
     properties
         App
@@ -12,7 +12,7 @@ classdef CarWashUiNonFunctionalTimeoutTests < matlab.uitest.TestCase & matlab.mo
             config.screenTimeoutPeriodSecs = 0.001;
             tra = TicketRepositoryTestAdapter();
             [carWashAdapterMock,behavior] = testCase.createMock(?ICarWashAdapter);
-            when(behavior.startWash(WashTypes.Quick), AssignOutputs(1));
+            when(behavior.startWash(WashType.Quick), AssignOutputs(1));
             testCase.App = CarWashSimulatorApp(config, carWashAdapterMock, tra);
         end
     end

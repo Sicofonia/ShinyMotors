@@ -8,7 +8,8 @@ classdef CarWashAdapterFactory
                 case true
                     obj = CarWashSimulatorAdapter(config);
                 otherwise
-                    obj = CarWashAdapter(config);
+                    exception = MException('CarWashAdapterFactory:notImplemented','Real scenario not implemented.');
+                    throw(exception);
             end
         end
     end

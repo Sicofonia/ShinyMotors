@@ -1,5 +1,5 @@
 classdef CarWashUiNonFunctionalTests < matlab.uitest.TestCase & matlab.mock.TestCase
-    % UI Tests for the ShinyMotors app
+    % UI Tests for non-functional features of the ShinyMotors app
 
     properties
         App
@@ -12,7 +12,7 @@ classdef CarWashUiNonFunctionalTests < matlab.uitest.TestCase & matlab.mock.Test
             config.screenTimeoutPeriodSecs = 120;
             tra = TicketRepositoryTestAdapter();
             [carWashAdapterMock,behavior] = testCase.createMock(?ICarWashAdapter);
-            when(behavior.startWash(WashTypes.Quick), AssignOutputs(1));
+            when(behavior.startWash(WashType.Quick), AssignOutputs(1));
             testCase.App = CarWashSimulatorApp(config, carWashAdapterMock, tra);
             testCase.addTeardown(@delete,testCase.App);
         end
@@ -25,7 +25,7 @@ classdef CarWashUiNonFunctionalTests < matlab.uitest.TestCase & matlab.mock.Test
             [carWashAdapterMock,behavior] = ...
                 testCase.createMock(?ICarWashAdapter);
 
-            when(behavior.startWash(WashTypes.Quick), AssignOutputs(1));
+            when(behavior.startWash(WashType.Quick), AssignOutputs(1));
 
             testCase.assignOutputsWhen(withAnyInputs(...
                 behavior.getWaterPumpStatus),0);
@@ -96,6 +96,23 @@ classdef CarWashUiNonFunctionalTests < matlab.uitest.TestCase & matlab.mock.Test
             testCase.verifyEqual(testCase.App.ErrorMessageLabel.Visible, OnOffSwitchState.on);
             testCase.verifyTrue(contains(testCase.App.ErrorMessageLabel.Text, ...
                 "cannot start now"));
+            testCase.verifyTrue(isempty(testCase.App.EnteredCodeLabel.Text));
+        end
+
+        % SCENARIO: User selects pay with card and enters wrong PIN
+        function whenPINNumberIsWrongWillInformUser(testCase)           
+            import matlab.lang.OnOffSwitchState
+            setUpCarWashAppWithFaultyWaterPump(testCase);
+            testCase.press(testCase.App.PayWithCardButton);
+
+            testCase.press(testCase.App.Button_1);
+            testCase.press(testCase.App.Button_2);
+            testCase.press(testCase.App.Button_3);
+            testCase.press(testCase.App.Button_4);
+
+            testCase.verifyEqual(testCase.App.ErrorMessageLabel.Visible, OnOffSwitchState.on);
+            testCase.verifyTrue(contains(testCase.App.ErrorMessageLabel.Text, ...
+                "Wrong PIN"));
             testCase.verifyTrue(isempty(testCase.App.EnteredCodeLabel.Text));
         end
     end

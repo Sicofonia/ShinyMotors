@@ -3,7 +3,7 @@ classdef Ticket
     
     properties(Access = private)
         Code          % string
-        WashType      % WashTypes
+        WashType      % WashType
         PurchasedDate % datetime
     end
     

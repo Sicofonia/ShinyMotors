@@ -5,7 +5,7 @@ classdef TicketValidatorTests < matlab.unittest.TestCase
     methods(Test)
         % Test methods     
         function validateTicketReturnsTrueWhenTicketExistsAndCurrent(testCase)
-            validTicket = Ticket('000001', WashTypes.Quick,datetime('today'));
+            validTicket = Ticket('000001', WashType.Quick,datetime('today'));
             result = TicketValidator.validate(validTicket);
             testCase.verifyTrue(result.IsValid);
         end
@@ -17,7 +17,7 @@ classdef TicketValidatorTests < matlab.unittest.TestCase
         end
 
         function validateTicketReturnsFalseWhenTicketHasExpired(testCase)
-            expiredTicket = Ticket('000002', WashTypes.Quick, ...
+            expiredTicket = Ticket('000002', WashType.Quick, ...
                 datetime(1900,1,1));
             result = TicketValidator.validate(expiredTicket);
             testCase.verifyFalse(result.IsValid);

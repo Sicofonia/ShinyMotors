@@ -5,13 +5,13 @@ classdef CarWashValidatorFactory
     methods(Static)
         function obj = create(washType)
             switch(washType)
-                case WashTypes.Quick
+                case WashType.Quick
                     obj = QuickWashValidator();
-                case WashTypes.Standard
+                case WashType.Standard
                     obj = StandardWashValidator();
-                case WashTypes.Premium
+                case WashType.Premium
                     obj = PremiumWashValidator();
-                case WashTypes.Ultimate
+                case WashType.Ultimate
                     obj = UltimateWashValidator();
                 otherwise
                     obj = nil;

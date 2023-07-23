@@ -1,9 +1,10 @@
 classdef CarWashUiTests < matlab.uitest.TestCase & matlab.mock.TestCase
     % UI Tests for the ShinyMotors app functional requirements around
-    % entering codes
+    % entering codes and paying with credit card
 
     properties
         App
+        Behaviour
     end
 
     methods(TestMethodSetup)
@@ -17,11 +18,12 @@ classdef CarWashUiTests < matlab.uitest.TestCase & matlab.mock.TestCase
             config.UltraShineLevel = 100;
             tra = TicketRepositoryTestAdapter();
             [carWashAdapterMock,behavior] = testCase.createMock(?ICarWashAdapter);
-            when(behavior.startWash(WashTypes.Quick), AssignOutputs(1));
-            testCase.assignOutputsWhen(withAnyInputs(behavior.getWaterPumpStatus),1)
-            testCase.assignOutputsWhen(withAnyInputs(behavior.getSoapLevel),100)
-            testCase.assignOutputsWhen(withAnyInputs(behavior.getWaxLevel),100)
-            testCase.assignOutputsWhen(withAnyInputs(behavior.getUltraShineLevel),100)
+            testCase.assignOutputsWhen(withAnyInputs(behavior.startWash),1);
+            testCase.assignOutputsWhen(withAnyInputs(behavior.getWaterPumpStatus),1);
+            testCase.assignOutputsWhen(withAnyInputs(behavior.getSoapLevel),100);
+            testCase.assignOutputsWhen(withAnyInputs(behavior.getWaxLevel),100);
+            testCase.assignOutputsWhen(withAnyInputs(behavior.getUltraShineLevel),100);
+            testCase.Behaviour = behavior;
             testCase.App = CarWashSimulatorApp(config, carWashAdapterMock, tra);
         end
     end
@@ -102,6 +104,62 @@ classdef CarWashUiTests < matlab.uitest.TestCase & matlab.mock.TestCase
             testCase.press(testCase.App.EnterCodeButton);
 
             testCase.verifyTrue(isempty(testCase.App.EnteredCodeLabel.Text));
+        end
+
+        % SCENARIO: Can pay with card a Quick Wash program
+        function payWithCardAQuickWashProgram(testCase)           
+            import matlab.lang.OnOffSwitchState
+            testCase.press(testCase.App.PayWithCardButton);
+            testCase.press(testCase.App.Button_0);
+            testCase.press(testCase.App.Button_0);
+            testCase.press(testCase.App.Button_0);
+            testCase.press(testCase.App.Button_0);
+            testCase.press(testCase.App.FirstProgramButton);
+
+            testCase.verifyEqual(testCase.App.ProceedPanel.Visible, OnOffSwitchState.off);
+            testCase.verifyEqual(testCase.App.EnterCodeButton.Visible, OnOffSwitchState.on);
+        end
+
+        % SCENARIO: Can pay with card a Standard Wash program
+        function payWithCardAStandardWashProgram(testCase)           
+            import matlab.lang.OnOffSwitchState
+            testCase.press(testCase.App.PayWithCardButton);
+            testCase.press(testCase.App.Button_0);
+            testCase.press(testCase.App.Button_0);
+            testCase.press(testCase.App.Button_0);
+            testCase.press(testCase.App.Button_0);
+            testCase.press(testCase.App.SecondProgramButton);
+
+            testCase.verifyEqual(testCase.App.ProceedPanel.Visible, OnOffSwitchState.off);
+            testCase.verifyEqual(testCase.App.EnterCodeButton.Visible, OnOffSwitchState.on);
+        end
+
+        % SCENARIO: Can pay with card a Premium Wash program
+        function payWithCardAPremiumWashProgram(testCase)           
+            import matlab.lang.OnOffSwitchState
+            testCase.press(testCase.App.PayWithCardButton);
+            testCase.press(testCase.App.Button_0);
+            testCase.press(testCase.App.Button_0);
+            testCase.press(testCase.App.Button_0);
+            testCase.press(testCase.App.Button_0);
+            testCase.press(testCase.App.ThirdProgramButton);
+
+            testCase.verifyEqual(testCase.App.ProceedPanel.Visible, OnOffSwitchState.off);
+            testCase.verifyEqual(testCase.App.EnterCodeButton.Visible, OnOffSwitchState.on);
+        end
+
+        % SCENARIO: Can pay with card a Ultimate Wash program
+        function payWithCardAUltimateWashProgram(testCase)           
+            import matlab.lang.OnOffSwitchState
+            testCase.press(testCase.App.PayWithCardButton);
+            testCase.press(testCase.App.Button_0);
+            testCase.press(testCase.App.Button_0);
+            testCase.press(testCase.App.Button_0);
+            testCase.press(testCase.App.Button_0);
+            testCase.press(testCase.App.FourthProgramButton);
+
+            testCase.verifyEqual(testCase.App.ProceedPanel.Visible, OnOffSwitchState.off);
+            testCase.verifyEqual(testCase.App.EnterCodeButton.Visible, OnOffSwitchState.on);
         end
     end
 end

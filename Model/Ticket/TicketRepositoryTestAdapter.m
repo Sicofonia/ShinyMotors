@@ -9,11 +9,11 @@ classdef TicketRepositoryTestAdapter < ITicketRepositoryAdapter
         function this = TicketRepositoryTestAdapter()
             yesterdayDate = datetime('yesterday');
             expiredDate = datetime(1900,1,1);
-            validQuickWashTicket = Ticket('123456', WashTypes.Quick, yesterdayDate);
-            validStandardWashTicket = Ticket('123457', WashTypes.Standard, yesterdayDate);
-            validPremiumWashTicket = Ticket('123458', WashTypes.Premium, yesterdayDate);
-            validUltimateWashTicket = Ticket('123459', WashTypes.Ultimate, yesterdayDate);
-            expiredWashTicket = Ticket('000002', WashTypes.Ultimate, expiredDate);
+            validQuickWashTicket = Ticket('123456', WashType.Quick, yesterdayDate);
+            validStandardWashTicket = Ticket('123457', WashType.Standard, yesterdayDate);
+            validPremiumWashTicket = Ticket('123458', WashType.Premium, yesterdayDate);
+            validUltimateWashTicket = Ticket('123459', WashType.Ultimate, yesterdayDate);
+            expiredWashTicket = Ticket('000002', WashType.Ultimate, expiredDate);
             this.Tickets = [validQuickWashTicket, ...
                 validStandardWashTicket, validPremiumWashTicket,...
                 validUltimateWashTicket, expiredWashTicket];
