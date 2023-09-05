@@ -5,13 +5,13 @@ classdef PaymentVisaAPIAdapter < IPaymentAPIAdapter
     %   execution time.
     
     properties
-        test
+        Card
     end
     
     methods
-        function this = PaymentVisaAPIAdapter()
+        function this = PaymentVisaAPIAdapter(card)
             %PaymentVisaAPIAdapter Construct an instance of this class
-            this.test = "test";
+            this.Card = card;
         end
         
         function result = validate(~, ~)

@@ -14,6 +14,7 @@ There are three types of tests, namely Integration (a tests that runs the
 App along with the simulator), UI (it only tests the UI of the app, using
 mocks as explained in [here](https://uk.mathworks.com/help/matlab/matlab_prog/write-tests-that-use-app-testing-and-mocking-frameworks.html)),
 and Unit tests (for testing individual classes).
+Prior running the tests, ensure that the project folder has been added to MATLAB's path. You can do this by opening up the dialog from "Home -> Set Path" tab. See this [link](https://uk.mathworks.com/help/matlab/matlab_prog/resolve-error-undefined-function-or-variable.html) for more info.
 To run all tests execute the command `TestRunner.runAll()`.
 (Ensure you have the root, Model and Tests folders added to the MATLAB path
 variable for tests to run successfully).

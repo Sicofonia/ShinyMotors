@@ -2,14 +2,14 @@ classdef PaymentTestAPIAdapter < IPaymentAPIAdapter
     %PaymentTestAPIAdapter An adapter used for testing purposes
     
     properties
-        test
+        Card
     end
     
     methods
-        function obj = PaymentTestAPIAdapter()
+        function obj = PaymentTestAPIAdapter(card)
             %PaymentTestAPIAdapter Construct an instance of this class
             %   Detailed explanation goes here
-            obj.test = "test";
+            obj.Card = card;
         end
         
         function isValid = validate(~, pinNumber)

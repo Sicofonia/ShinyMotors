@@ -13,8 +13,8 @@ classdef TestCardReaderAdapter < ICardReaderAdapter
             cardNumber = "0000-0000-0000-0000";
             name = 'test';
             expireDate = datetime(2999,12,31);
-            cvc = 000;
-            card = Card(cardNumber,name,expireDate,cvc);
+            cvv = 000;
+            card = Card(cardNumber,name,expireDate,cvv);
         end
     end
 end

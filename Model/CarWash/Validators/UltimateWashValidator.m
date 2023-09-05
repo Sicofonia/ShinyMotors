@@ -1,4 +1,4 @@
-classdef UltimateWashValidator
+classdef UltimateWashValidator < ICarWashValidator
     %UltimateWashValidator Pure Fabrication class to validate car wash data
     %   Helps to validate whether or not the car was is ready to start
     %   a wash.
